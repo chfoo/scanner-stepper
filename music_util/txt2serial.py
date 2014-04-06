@@ -13,6 +13,7 @@ def main():
     arg_parser.add_argument('input_file', type=argparse.FileType('r'))
     arg_parser.add_argument('output_file', type=argparse.FileType('wb'))
     arg_parser.add_argument('--semitones', type=int)
+    arg_parser.add_argument('--adjust-duration', type=float)
     arg_parser.add_argument('--sync-tone', action='store_true')
 
     args = arg_parser.parse_args()
@@ -20,7 +21,7 @@ def main():
     output_file = args.output_file
 
     if args.sync_tone:
-        play_sync_tone(output_file)
+        play_sync_tone(output_file, duration_factor=args.adjust_duration)
         time.sleep(2)
 
     for line in args.input_file:
@@ -33,6 +34,9 @@ def main():
             if args.semitones:
                 frequency = int(adjust_frequency(frequency, args.semitones))
 
+            if args.adjust_duration:
+                millisecs = int(duration * 1000.0 * args.adjust_duration)
+
             output_file.write(
                 '-32,{0},{1}\n'.format(frequency, millisecs).encode('ascii')
             )
@@ -41,7 +45,7 @@ def main():
 
     if args.sync_tone:
         time.sleep(2)
-        play_sync_tone(output_file)
+        play_sync_tone(output_file, duration_factor=args.adjust_duration)
 
 
 def adjust_frequency(frequency, semitones):
@@ -50,9 +54,13 @@ def adjust_frequency(frequency, semitones):
     return max(0, 440.0 * pow(1.05946, note - 49))
 
 
-def play_sync_tone(output_file):
+def play_sync_tone(output_file, duration_factor=None):
     frequency = 220
     millisecs = 1000
+
+    if duration_factor:
+        millisecs = int(millisecs * duration_factor)
+
     output_file.write(
         '-32,{0},{1}\n'.format(frequency, millisecs).encode('ascii')
     )
