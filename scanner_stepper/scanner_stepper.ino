@@ -3,14 +3,14 @@
 const int stepsPerRevolution = 200;
 const int maxRpm = 150;
 const int ledPin = 10;
-const int forwardSwitchPin = 7;
+const int forwardSwitchPin = 12;
 const int backwardSwitchPin = 8;
 const int maxStepsPerDirection = 500;
 Stepper stepper(stepsPerRevolution, 2, 4, 5, 6);
-const int driverEnablePin = 3;
+const int driverEnablePin = 3; // 490Hz
 // http://homepage.cs.uiowa.edu/~jones/step/current.html
-// duty-cycle = 0.49 = (0.6 A * 4.1 ohm) / (7.2 V_supply)
-const int driverEnablePinValue = 0.6 * 4.1 /7.2 * 255; 
+// duty-cycle = 0.49 = (0.6 A * 4.1 ohm) / (9.6 V_supply)
+const int driverEnablePinValue = 0.6 * 4.1 / 9.6 * 255;
 boolean movingForward = true;
 int stepCounter = 0;
 
