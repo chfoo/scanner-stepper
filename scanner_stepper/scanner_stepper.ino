@@ -26,17 +26,17 @@ void setup() {
 }
 
 void playNote(int frequency, int duration) {
-  float revolutionsPerMinute = frequency * 60.0 / stepsPerRevolution;
-  float steps = 1.0 * frequency * duration / 1000.0;
+  long revolutionsPerMinute = frequency * 60L / stepsPerRevolution;
+  long steps = ((long) frequency) * duration / 1000L;
 
   Serial.print("F: ");
   Serial.println(frequency);
   Serial.print("T: ");
   Serial.println(duration);
   Serial.print("RPM: ");
-  Serial.println((int) revolutionsPerMinute);
+  Serial.println(revolutionsPerMinute);
   Serial.print("s: ");
-  Serial.println((int) steps);
+  Serial.println(steps);
 
   if (revolutionsPerMinute > maxRpm) {
     Serial.println("Max RPM exceeded.");
