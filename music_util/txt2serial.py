@@ -8,6 +8,7 @@ import math
 import os.path
 import subprocess
 import time
+import itertools
 
 
 def main():
@@ -17,6 +18,7 @@ def main():
     arg_parser.add_argument('--semitones', type=int)
     arg_parser.add_argument('--adjust-duration', type=float)
     arg_parser.add_argument('--sync-tone', action='store_true')
+    arg_parser.add_argument('--loop', type=int, default=1)
 
     args = arg_parser.parse_args()
 
@@ -43,7 +45,9 @@ def main():
         play_sync_tone(output_file, duration_factor=args.adjust_duration)
         time.sleep(2)
 
-    for line in args.input_file:
+    lines = tuple(args.input_file)
+
+    for line in itertools.chain(*itertools.repeat(lines, args.loop)):
         duration, frequency = line.strip().split()
         duration = float(duration)
         millisecs = int(duration * 1000)
