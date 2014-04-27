@@ -15,12 +15,11 @@ Hardware
 --------
 
 .. image:: schematic/ardunio_scanner_stepper_bb.png
-   
-   :title: Breadboard
+   :alt: Breadboard
 
-.. image:: schematic/ardunio_scanner_stepper_schematic.png
+.. image:: schematic/ardunio_scanner_stepper_schem.png
+   :alt: Schematic
 
-   :title: Schematic
 
 Materials used:
 
