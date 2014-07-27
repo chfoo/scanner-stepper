@@ -5,7 +5,9 @@ scanner stepper
 Play music with a scanner stepper motor.
 
 
-TODO: add a link to a video
+Videos:
+
+* Attempt 1: https://www.youtube.com/watch?v=j02qTJeHWPY
 
 
 Requirements
